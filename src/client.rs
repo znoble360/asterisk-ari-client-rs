@@ -618,8 +618,8 @@ impl ChannelsAPI for AriClient {
                 "name": "{_filepath_}",
                 "format": "{_audio_format_}",
                 "terminateOn": "{_terminate_on_}",
-                "maxDuration": {_max_duration_},
-                "maxSilence": {_max_silence_},
+                "maxDurationSeconds": {_max_duration_},
+                "maxSilenceSeconds": {_max_silence_},
                 "ifExists": "{_if_exists_}",
                 "beep": {_beep_}
             }}
