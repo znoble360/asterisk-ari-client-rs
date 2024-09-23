@@ -390,6 +390,7 @@ impl ApplicationsAPI for AriClient {
 
     /// Get details of an application.
     async fn get(&self, application_name: &str) -> Result<Application> {
+        let application_name = utf8_percent_encode(application_name, NON_ALPHANUMERIC);
         let resp = HTTP_CLIENT
             .get(format!("{}/applications/{}", self.url, application_name))
             .headers(self.get_common_headers()?)
@@ -494,6 +495,7 @@ impl ChannelsAPI for AriClient {
     }
 
     async fn get_variable(&self, channel_id: &str, var_name: &str) -> Result<String> {
+        let var_name = utf8_percent_encode(var_name, NON_ALPHANUMERIC);
         let resp = HTTP_CLIENT
             .get(format!(
                 "{}/channels/{}/variable?variable={}",
@@ -667,6 +669,7 @@ impl RecordingsAPI for AriClient {
 
     }
     async fn stop_recording(&self, recording_name: &str) -> Result<()> {
+        let recording_name = utf8_percent_encode(recording_name, NON_ALPHANUMERIC);
         let resp = HTTP_CLIENT
             .post(format!(
                 "{}/recordings/live/{}/stop",
@@ -683,6 +686,7 @@ impl RecordingsAPI for AriClient {
     }
 
     async fn pause_recording(&self, recording_name: &str) -> Result<()> {
+        let recording_name = utf8_percent_encode(recording_name, NON_ALPHANUMERIC);
         let resp = HTTP_CLIENT
             .post(format!(
                 "{}/recordings/live/{}/pause",
@@ -698,6 +702,7 @@ impl RecordingsAPI for AriClient {
     }
 
     async fn unpause_recording(&self, recording_name: &str) -> Result<()> {
+        let recording_name = utf8_percent_encode(recording_name, NON_ALPHANUMERIC);
         let resp = HTTP_CLIENT
             .delete(format!(
                 "{}/recordings/live/{}/pause",
@@ -713,6 +718,7 @@ impl RecordingsAPI for AriClient {
     }
 
     async fn mute_recording(&self, recording_name: &str) -> Result<()> {
+        let recording_name = utf8_percent_encode(recording_name, NON_ALPHANUMERIC);
         let resp = HTTP_CLIENT
             .post(format!(
                 "{}/recordings/live/{}/mute",
@@ -728,6 +734,7 @@ impl RecordingsAPI for AriClient {
     }
 
     async fn unmute_recording(&self, recording_name: &str) -> Result<()> {
+        let recording_name = utf8_percent_encode(recording_name, NON_ALPHANUMERIC);
         let resp = HTTP_CLIENT
             .delete(format!(
                 "{}/recordings/live/{}/mute",
@@ -743,6 +750,7 @@ impl RecordingsAPI for AriClient {
     }
 
     async fn delete_stored_recording(&self, recording_name: &str) -> Result<()> {
+        let recording_name = utf8_percent_encode(recording_name, NON_ALPHANUMERIC);
         let resp = HTTP_CLIENT
             .delete(format!("{}/recordings/stored/{}", self.url, recording_name))
             .headers(self.get_common_headers()?)
@@ -755,6 +763,7 @@ impl RecordingsAPI for AriClient {
     }
 
     async fn delete_live_recording(&self, recording_name: &str) -> Result<()> {
+        let recording_name = utf8_percent_encode(recording_name, NON_ALPHANUMERIC);
         let resp = HTTP_CLIENT
             .delete(format!("{}/recordings/live/{}", self.url, recording_name))
             .headers(self.get_common_headers()?)
