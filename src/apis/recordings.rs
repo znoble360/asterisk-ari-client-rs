@@ -25,6 +25,9 @@ pub trait RecordingsAPI {
     /// Unmute a live recording.
     async fn unmute_recording(&self, recording_name: &str) -> Result<()>;
 
+    /// Delete a stored recording.
+    async fn delete_stored_recording(&self, recording_name: &str) -> Result<()>;
+
     /// Stop a live recording and discard it.
-    async fn delete_recording(&self, recording_name: &str) -> Result<()>;
+    async fn delete_live_recording(&self, recording_name: &str) -> Result<()>;
 }

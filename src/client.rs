@@ -742,7 +742,19 @@ impl RecordingsAPI for AriClient {
         Ok(())
     }
 
-    async fn delete_recording(&self, recording_name: &str) -> Result<()> {
+    async fn delete_stored_recording(&self, recording_name: &str) -> Result<()> {
+        let resp = HTTP_CLIENT
+            .delete(format!("{}/recordings/stored/{}", self.url, recording_name))
+            .headers(self.get_common_headers()?)
+            .send()
+            .await?;
+
+        let status = resp.status();
+        eval_status_code!(status, StatusCode::NO_CONTENT, None);
+        Ok(())
+    }
+
+    async fn delete_live_recording(&self, recording_name: &str) -> Result<()> {
         let resp = HTTP_CLIENT
             .delete(format!("{}/recordings/live/{}", self.url, recording_name))
             .headers(self.get_common_headers()?)
